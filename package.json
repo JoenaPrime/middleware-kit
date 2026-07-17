@@ -1,0 +1,52 @@
+{
+	"name": "middleware-kit",
+	"version": "1.0.0",
+	"description": "A small, universal engine for composing async functions using the onion (middleware) pattern — not tied to HTTP.",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"build": "tsup src/index.ts --format esm,cjs --dts --clean",
+		"test": "bun test",
+		"test:watch": "bun test --watch",
+		"typecheck": "tsc --noEmit",
+		"format": "biome format --write .",
+		"lint": "biome lint .",
+		"check": "biome check .",
+		"prepublishOnly": "bun run typecheck && bun run check && bun run test && bun run build"
+	},
+	"keywords": [
+		"middleware",
+		"compose",
+		"onion",
+		"pipeline",
+		"async",
+		"koa-compose",
+		"trace"
+	],
+	"author": "",
+	"license": "MIT",
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.4",
+		"@types/bun": "latest",
+		"tsup": "^8.0.0",
+		"typescript": "^5.5.0"
+	},
+	"engines": {
+		"node": ">=18"
+	}
+}
