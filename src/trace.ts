@@ -1,9 +1,9 @@
 import {
-	normalize,
 	type AnyMiddleware,
 	type LayerInfo,
 	type NamedMiddleware,
 	type Next,
+	normalize,
 } from "./types";
 
 /**

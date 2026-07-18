@@ -1,7 +1,7 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import { compose } from "../src/compose";
 import { explain } from "../src/explain";
-import { traceable, TraceEvent } from "../src/trace";
+import { type TraceEvent, traceable } from "../src/trace";
 
 describe("explain", () => {
 	it("describes an empty pipeline", () => {
@@ -15,7 +15,7 @@ describe("explain", () => {
 		const result = explain([
 			{ name: "auth", handler: async () => {} },
 			async function cache() {},
-			async () => {}, 
+			async () => {}, // truly anonymous
 		]);
 
 		expect(result.size).toBe(3);
@@ -102,8 +102,9 @@ describe("traceable", () => {
 
 		const errorEvent = events.find((e) => e.type === "error");
 		expect(errorEvent).toBeDefined();
-		expect(errorEvent?.layer.name).toBe("failing");
-		expect((errorEvent?.error as Error).message).toBe("boom");
+		if (!errorEvent) throw new Error("expected an error event to be recorded");
+		expect(errorEvent.layer.name).toBe("failing");
+		expect((errorEvent.error as Error).message).toBe("boom");
 	});
 
 	it("preserves original middleware behavior (functional transparency)", async () => {

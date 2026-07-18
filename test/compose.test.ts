@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { compose } from "../src/compose";
 import { AbortError, MultipleNextCallError } from "../src/types";
 
@@ -92,7 +92,6 @@ describe("compose", () => {
 	it("propagates synchronous errors thrown by a middleware", async () => {
 		const pipeline = compose([
 			(_ctx, next) => {
-				// synchronous throw, not inside a promise
 				throw new Error("sync boom");
 			},
 		]);

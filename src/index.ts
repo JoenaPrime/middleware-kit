@@ -1,13 +1,9 @@
-export { compose } from "./compose";
 export type { ComposedPipeline } from "./compose";
-
-export { explain } from "./explain";
+export { compose } from "./compose";
 export type { ExplainedLayer, PipelineExplanation } from "./explain";
-
-export { traceable } from "./trace";
+export { explain } from "./explain";
 export type { TraceEvent, TraceEventType, TraceOptions } from "./trace";
-
-export { AbortError, MultipleNextCallError, normalize } from "./types";
+export { traceable } from "./trace";
 export type {
 	AnyMiddleware,
 	ComposeOptions,
@@ -16,3 +12,4 @@ export type {
 	NamedMiddleware,
 	Next,
 } from "./types";
+export { AbortError, MultipleNextCallError, normalize } from "./types";
